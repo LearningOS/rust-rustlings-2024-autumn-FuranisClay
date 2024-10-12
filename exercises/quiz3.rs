@@ -18,6 +18,8 @@
 
 //
 
+use std::fmt::Display;
+
 //要支持多种类型，可以使用泛型结构体
 pub struct ReportCard<T> {
     pub grade: T,
@@ -25,7 +27,7 @@ pub struct ReportCard<T> {
     pub student_age: u8,
 }
 
-// 告诉T如何格式化（保证T一定是一个可以被Display的变量（实现Display的trait））
+// 告诉T如何格式化（保证T一定是一个可以被Display的变量（））
 impl<T: Display> ReportCard<T> {
     pub fn print(&self) -> String {
         format!("{} ({}) - achieved a grade of {}",
