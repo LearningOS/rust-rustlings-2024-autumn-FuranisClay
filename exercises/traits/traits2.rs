@@ -8,13 +8,21 @@
 //
 // Execute `rustlings hint traits2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+// 
 
 trait AppendBar {
     fn append_bar(self) -> Self;
 }
 
 // TODO: Implement trait `AppendBar` for a vector of strings.
+impl AppendBar for Vec<String> {
+    fn append_bar(mut self) -> Self {
+        self.push(String::from("Bar"));
+        self
+        //返回的还是self本身,是一个不消耗所有权的方法,需要标注mut,在trait1中是消耗所有权的,返回的是新的String,所有权直接转移
+    }
+    
+}
 
 #[cfg(test)]
 mod tests {
