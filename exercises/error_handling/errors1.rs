@@ -9,14 +9,24 @@
 // Execute `rustlings hint errors1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+//
 
-pub fn generate_nametag_text(name: String) -> Option<String> {
+// pub fn generate_nametag_text(name: String) -> Option<String> {
+//     if name.is_empty() {
+//         // Empty names aren't allowed.
+//         None
+//     } else {
+//         Some(format!("Hi! My name is {}", name))
+//     }
+// }
+
+//result 也是一个枚举类型，有两个值，Ok和Err，Ok表示成功，Err表示失败，是一个泛型枚举
+pub fn generate_nametag_text(name: String) -> Result<String,String> {
     if name.is_empty() {
         // Empty names aren't allowed.
-        None
+        Err("`name` was empty; it must be nonempty.".into())
     } else {
-        Some(format!("Hi! My name is {}", name))
+        Ok(format!("Hi! My name is {}", name))
     }
 }
 
