@@ -11,7 +11,7 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// 
 
 use std::collections::HashMap;
 
@@ -35,7 +35,10 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    map.values().filter(|&&val| val == value).count()
+    //map.values()返回一个迭代器，filter()方法会对迭代器中的每一个元素进行过滤，只保留满足条件的元素。这个迭代器中的元素是 Progress 类型的引用，所以我们需要使用 &&val 来解引用。
+    //引用的 val 与 value 进行比较，如果相等，filter() 方法会保留这个元素，否则会将其丢弃。防止所有的元素都被丢弃，我们使用 count() 方法来计算保留下来的元素的数量。
+    //两个&是因为val是引用类型，一个用于解引用，一个引用
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,7 +57,8 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    collection.iter().map(|map| count_iterator(map, value)).sum()
+
 }
 
 #[cfg(test)]
