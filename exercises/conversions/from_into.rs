@@ -40,10 +40,39 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
+// 
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.len() == 0 {
+            return Person::default();
+        }
+        let parts: Vec<&str> = s.split(',').collect();
+        let name = parts.get(0).unwrap_or(&"").to_string();
+        // let name = parts.get(0).unwrap_or(&"").to_string();
+
+// 从 parts 向量中获取第一个元素（姓名）。get(0) 方法返回一个 Option<&str>，如果存在元素则为 Some，否则为 None。unwrap_or(&"") 确保即使没有元素也不会 panic，返回一个空字符串切片。然后，使用 to_string() 将其转换为 String 类型
+        if name.len() == 0 {
+            return Person::default();
+        }
+        // Check if there is a second part (age)
+// Check for age, ensuring there's a second part and parsing it correctly
+if parts.len() < 2 {
+    return Person::default();
+}
+
+let age = parts[1].parse::<usize>();
+
+match age {
+    Ok(age) => {
+        // Only return a valid Person if we have no extra parts
+        if parts.len() > 2 {
+            return Person::default();
+        }
+        Person { name, age }
+    },
+    Err(_) => Person::default(),
+}
     }
 }
 
